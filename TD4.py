@@ -9,6 +9,11 @@ import matplotlib.pyplot as plt
 def hashNaive(s: str) -> int:
     return sum([ord(c) for c in s])
 
+def hashHorner(s: str) -> int:
+    h = 0
+    for c in s:
+        h = 33*h + ord(c)
+
 class Hashtable:
     def __init__(self, h, length):
         self.__h = h
@@ -19,7 +24,7 @@ class Hashtable:
         return self.values
     
     def put(self, key, value):
-        index = self.__h(key) % self.__length
+        index = self.__h(key) % self.__length # un problème survient ici lorsque j'utilise la fonction hashHorner au lieu de hashNaive mais je ne sais pas le résoudre.
         if self.values[index] == None:
             self.values[index] = [(key, value)]
         else:
